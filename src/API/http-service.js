@@ -92,7 +92,7 @@ export const makePostRequest = async (
         })
           .then(res => res.json())
           .then(jsonResponse => {
-            if (jsonResponse.error === false) {
+            if (jsonResponse.error === false) { 
               resolve(jsonResponse);
             } else {
               console.log(jsonResponse);
