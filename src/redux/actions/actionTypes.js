@@ -1,0 +1,4 @@
+export const DOCTOR_DETAIL = 'DOCTOR_DETAIL';
+export const DOCTOR_TIMING = 'DOCTOR_TIMING';
+export const DOCTOR_FORM_RESET = 'DOCTOR_FORM_RESET';
+export const TOGGLE_TAB = 'TOGGLE_TAB';
