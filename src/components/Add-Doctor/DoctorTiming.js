@@ -234,7 +234,7 @@ class DoctorTiming extends Component {
         <section
           className='d-flex justify-content-center'
           style={{ padding: "10px 80px", marginBottom: "15px" }}>
-          <div className='formMainDiv'>
+          <div className='className="shadow-lg p-3 mb-5 bg-light rounded formMainDiv'>
             <h5>Edit Work Timings</h5>
             <hr />
             {/* monday */}
@@ -307,7 +307,7 @@ class DoctorTiming extends Component {
                 <button
                   style={{ marginLeft: "15px" }}
                   className='btn btn-success'
-                  onClick={() => this._handleAdd(" wednesday")}>
+                  onClick={() => this._handleAdd("wednesday")}>
                   Add
                 </button>
                 <hr/>
@@ -367,7 +367,7 @@ class DoctorTiming extends Component {
                 <button
                   className='btn btn-success'
                   style={{ marginLeft: "15px" }}
-                  onClick={() => this._handleAdd("monday")}>
+                  onClick={() => this._handleAdd("friday")}>
                   Add
                 </button>
                 <hr/>

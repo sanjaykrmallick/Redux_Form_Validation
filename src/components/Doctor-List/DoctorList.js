@@ -174,7 +174,7 @@ export default class DoctorList extends Component {
       };
       return (
         <Fragment key={doc.id}>
-          <TableRow key={doc.id}>
+          <TableRow key={doc.id} >
             <TableCell component='TableCell'>
               <span>
                 <FontAwesomeIcon icon={faUser} />
@@ -226,14 +226,14 @@ export default class DoctorList extends Component {
     });
 
     return (
-      <div>
+      <div className="d-flex flex-column align-items-center">
         <div>
           <h4>Doctors List</h4>
         </div>
 
         {TableBodyOfDoctorList.length ? (
           <Fragment>
-            <div>
+            <div style={{width: "80%"}} className='className="shadow-lg p-3 mb-5 bg-white rounded'>
               <hr />
               <TableContainer component={Paper}>
                 <Table aria-label='simple table'>

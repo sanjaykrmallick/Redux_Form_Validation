@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { makeGetRequest } from "../../API/http-service";
 import { doctorDetail } from "../../redux/actions/doctorDetail";
-import { FormControl, MenuItem, Select } from "@material-ui/core";
+import { MenuItem, Select } from "@material-ui/core";
 
 import "./AddDoctor.styles.css";
 const ramId = () => {
@@ -146,7 +146,6 @@ class DoctorDetail extends Component {
         };
         this.props.doctorDetail({ data });
         console.log("Final API call: ", userData);
-        // console.log("IsSubmit :",this.props.isSubmit)
       }
     });
   };
@@ -370,7 +369,7 @@ class DoctorDetail extends Component {
     return (
       <Fragment>
         <section className='d-flex justify-content-center'>
-          <form className='formMainDiv' onSubmit={this._handleOnSubmit}>
+          <form className='className="shadow-lg p-3 mb-5 bg-light rounded formMainDiv' onSubmit={this._handleOnSubmit} >
             <h5>Edit Basic Info</h5>
             <hr />
             <div className='formDiv'>
@@ -407,11 +406,6 @@ class DoctorDetail extends Component {
                   <MenuItem value=''>
                     <em>Select Specialty</em>
                   </MenuItem>
-                  {/* {specialties.map((e) => (
-                    <option key={e.id} value={e.name}>
-                      {e.name}
-                    </option>
-                  ))} */}
                   {specialtyOptions}
                 </Select>
                 {errors && (
@@ -692,9 +686,14 @@ class DoctorDetail extends Component {
               </div>
             </div>
             <hr />
-            <button type='submit' className='btn btn-primary'>
-              Save
-            </button>
+            <div className='d-flex justify-content-end'>
+              <button
+                onClick={this._handleOnSubmit}
+                className='btn btn-primary '
+                style={{ width: "8%" }}>
+                Save
+              </button>
+            </div>
           </form>
         </section>
       </Fragment>

@@ -16,22 +16,23 @@ class AddDoctor extends Component {
   render() {
     return (
       <Fragment>
+        <section className="container">
         <Router>
           <div>
             <div>
               <Tabs>
                 <TabList>
                   <Tab>
-                    <Link to='/step-1'>DoctorDetail</Link>
+                    <Link className="tabColor" to='/add-doctor'>DoctorDetail</Link>
                   </Tab>
                   <Tab>
-                    <Link to='/step-2'>DoctorTiming</Link>
+                    <Link className="tabColor" to='/step-2'>DoctorTiming</Link>
                   </Tab>
                 </TabList>
 
                 <TabPanel>
                   <Route
-                    path='/'
+                    path='/add-doctor'
                     render={(props) => <DoctorDetail {...props} isAuthed={true} />}
                   />
                 </TabPanel>
@@ -43,6 +44,7 @@ class AddDoctor extends Component {
             </div>
           </div>
         </Router>
+        </section>
       </Fragment>
     );
   }

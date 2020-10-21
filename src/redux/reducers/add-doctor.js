@@ -1,46 +1,39 @@
 import {
     DOCTOR_DETAIL,
     DOCTOR_TIMING, 
-    TOGGLE_TAB,
-    DOCTOR_FORM_RESET
 } from '../actions';
 
 const initialState = {
-    active_Tab: '1',
     doctorDetail : {},
     doctorList: []
 }
 
 export const addDoctorReducer = (state = initialState, action) => {
-
+    let newState = { ...state };
     switch(action.type) {
         
         case DOCTOR_DETAIL: {
-            state = {
-                ...state,
-                doctorDetail: {...action.payload.doctorDetail},
+            // console.log(action.payload)
+            newState = {
+                ...newState,
+                doctorDetail: {...action.payload.data},
             }
             break;
         }
         case DOCTOR_TIMING: {
+            console.log("DoctorTiming: ",action.payload)
             let obj = {
-                ...state.doctorDetail
+                ...newState.doctorDetail
             }
-            if(action.payload.doctorTiming && Object.keys(action.payload.doctorTiming).length) {
-                Object.assign(obj, {availability: action.payload.doctorTiming})
+            if(action.payload && Object.keys(action.payload).length) {
+                Object.assign(obj, {availability: action.payload})
             }
-            state = {
-                ...state,
+            newState = {
+                ...newState,
                 doctorDetail: {},
                 doctorList: [...state.doctorList, obj],
             }
-            break;
-        }
-        case DOCTOR_FORM_RESET: {
-            state = {
-                ...state,
-                doctorDetail: {},
-            }
+            console.log("DoctorTimingsucess")
             break;
         }
         default: {
@@ -48,6 +41,6 @@ export const addDoctorReducer = (state = initialState, action) => {
         }
     }
 
-    return state;
+    return newState;
 
 }
