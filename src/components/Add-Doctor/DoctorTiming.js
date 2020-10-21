@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
+import "./AddDoctor.styles.css";
+import { doctorTiming } from "../../redux/actions/doctorTiming";
 
 class DoctorTiming extends Component {
   constructor(props) {
@@ -134,14 +136,15 @@ class DoctorTiming extends Component {
     });
     return (
       <Fragment>
-        <FormControl key={ind} className=''>
+        <div className="d-flex justify-content-around" style={{marginTop:"10px"}}>
+        <FormControl key={ind} className='' style={{ flex: "3", height: "38px" , marginLeft:"20px"}}>
           <Select
             labelId='demo-simple-select-helper-label'
             id='demo-simple-select-helper'
             value={val.from}
             onChange={(e) =>
               this._handleOnChange(day, ind, {
-                'from': parseInt(e.target.value) ? parseInt(e.target.value) : "",
+                from: parseInt(e.target.value) ? parseInt(e.target.value) : "",
               })
             }>
             <MenuItem value=''>
@@ -150,14 +153,14 @@ class DoctorTiming extends Component {
             {fromTimeOpt}
           </Select>
         </FormControl>
-        <FormControl key={ind} className=''>
+        <FormControl key={ind} className='' style={{ flex: "3", height: "38px" ,marginLeft:"20px" }}>
           <Select
             labelId='demo-simple-select-helper-label'
             id='demo-simple-select-helper'
             value={val.to}
             onChange={(e) =>
               this._handleOnChange(day, ind, {
-                'to': parseInt(e.target.value) ? parseInt(e.target.value) : "",
+                to: parseInt(e.target.value) ? parseInt(e.target.value) : "",
               })
             }>
             <MenuItem value=''>
@@ -171,9 +174,10 @@ class DoctorTiming extends Component {
           outline
           color='danger'
           className='btn btn-danger'
-          style={{ flex: "1", height: "38px" }}>
+          style={{ flex: "1", height: "38px" , marginLeft:"20px" }}>
           Delete
         </button>
+        </div>
       </Fragment>
     );
   };
@@ -217,8 +221,8 @@ class DoctorTiming extends Component {
       if (!errors) {
         const { userData } = this.state;
         console.log("Make API call: ", userData);
-        this.props.addDoctorTiming(userData)
-        this.props.history.push('/newly-added-doctors')
+        this.props.doctorTiming(userData);
+        this.props.history.push("/newly-added-doctors");
       }
     });
   };
@@ -246,6 +250,7 @@ class DoctorTiming extends Component {
                   onClick={() => this._handleAdd("monday")}>
                   Add
                 </button>
+                <hr/>
               </div>
 
               {React.Children.toArray(
@@ -263,6 +268,7 @@ class DoctorTiming extends Component {
                 </Fragment>
               )}
             </div>
+            
             {/* tuesday */}
             <div
               className='d-flex flex-column'
@@ -275,6 +281,7 @@ class DoctorTiming extends Component {
                   onClick={() => this._handleAdd("tuesday")}>
                   Add
                 </button>
+                <hr/>
               </div>
 
               {React.Children.toArray(
@@ -304,6 +311,7 @@ class DoctorTiming extends Component {
                   onClick={() => this._handleAdd(" wednesday")}>
                   Add
                 </button>
+                <hr/>
               </div>
 
               {React.Children.toArray(
@@ -333,6 +341,7 @@ class DoctorTiming extends Component {
                   onClick={() => this._handleAdd("thursday")}>
                   Add
                 </button>
+                <hr/>
               </div>
 
               {React.Children.toArray(
@@ -362,6 +371,7 @@ class DoctorTiming extends Component {
                   onClick={() => this._handleAdd("monday")}>
                   Add
                 </button>
+                <hr/>
               </div>
 
               {React.Children.toArray(
@@ -391,6 +401,7 @@ class DoctorTiming extends Component {
                   onClick={() => this._handleAdd("saturday")}>
                   Add
                 </button>
+                <hr/>
               </div>
 
               {React.Children.toArray(
@@ -419,6 +430,7 @@ class DoctorTiming extends Component {
                   onClick={() => this._handleAdd("sunday")}>
                   Add
                 </button>
+                <hr/>
               </div>
 
               {React.Children.toArray(
@@ -441,7 +453,7 @@ class DoctorTiming extends Component {
               <button
                 onClick={this._handleSubmitData}
                 className='btn btn-primary '
-                style={{ width: "20%" }}>
+                style={{ width: "8%" }}>
                 Save
               </button>
             </div>
@@ -452,10 +464,11 @@ class DoctorTiming extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        DoctorTiming: (doctorTimingData) => dispatch(DoctorTiming(doctorTimingData))
-    }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    doctorTiming: (doctorTimingData) =>
+      dispatch(doctorTiming(doctorTimingData)),
+  };
+};
 
-export default withRouter(connect(null,mapDispatchToProps)(DoctorTiming));
+export default withRouter(connect(null, mapDispatchToProps)(DoctorTiming));

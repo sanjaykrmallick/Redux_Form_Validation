@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Table } from "@material-ui/core";
 import { useSelector } from 'react-redux';
 import { NewLists } from './NewLists';
+
 
 const NewAddedDoctor = () => {
 
@@ -25,9 +26,9 @@ const NewAddedDoctor = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {stateDate.DocList.map(doc =>
+                    {stateDate.DocList===null || stateDate.DocList===undefined ? <Fragment><h1>DATA NOT Available</h1></Fragment> : stateDate.DocList.map(doc =>
                         <NewLists doctor={doc} key={doc.phone} />
-                    )}
+                    ) }
                 </tbody>
             </Table>
         </div>

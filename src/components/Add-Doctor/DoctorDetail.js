@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { makeGetRequest } from "../../API/http-service";
 import { doctorDetail } from '../../redux/actions/doctorDetail';
 
+import "./AddDoctor.styles.css"
 const ramId = () => {
   //generate random Id
   return Math.floor(1000 + Math.random() * 9000);
@@ -89,8 +90,7 @@ class DoctorDetail extends Component {
   };
 
   _handleOnChange = (field, value) => {
-    console.log(field, value);
-    debugger;
+    // console.log(field, value);
     const { userData, isDirty } = this.state;
     if (!value && typeof value === "number") {
       userData[field] = "";
@@ -124,7 +124,7 @@ class DoctorDetail extends Component {
       experience: true,
       consultFees: true,
       qualification: true,
-      practisingAt: true,
+      practiceAt: true,
       languages: true,
       email: true,
       phone: true,
@@ -150,7 +150,7 @@ class DoctorDetail extends Component {
   };
 
   _validateForm() {
-    debugger;
+    // debugger;
     const { userData, isDirty, errors } = this.state;
     Object.keys(userData).forEach((each) => {
       switch (each) {
@@ -218,12 +218,13 @@ class DoctorDetail extends Component {
           break;
         }
         case "practiceAt": {
-          if (isDirty.practisingAt) {
-            if (!userData.practisingAt.trim().length) {
+          if (isDirty.practiceAt) {
+              debugger
+            if (!userData.practiceAt.trim().length) {
               errors[each] = "* Please fill above field";
             } else {
               delete errors[each];
-              isDirty.practisingAt = false;
+              isDirty.practiceAt = false;
             }
           }
           break;
