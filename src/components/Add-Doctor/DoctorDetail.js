@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { connect } from "react-redux";
 import { makeGetRequest } from "../../API/http-service";
-import { doctorDetail } from '../../redux/actions/doctorDetail';
+import { doctorDetail } from "../../redux/actions/doctorDetail";
+import { FormControl, MenuItem, Select } from "@material-ui/core";
 
-import "./AddDoctor.styles.css"
+import "./AddDoctor.styles.css";
 const ramId = () => {
   //generate random Id
   return Math.floor(1000 + Math.random() * 9000);
@@ -16,7 +16,7 @@ class DoctorDetail extends Component {
     this.state = {
       isDirty: {
         name: "",
-        speciality: "",
+        specialty: "",
         experience: "",
         consultFees: "",
         qualification: "",
@@ -32,7 +32,7 @@ class DoctorDetail extends Component {
       },
       userData: {
         name: "",
-        speciality: "",
+        specialty: "",
         experience: "",
         consultFees: "",
         qualification: "",
@@ -72,6 +72,7 @@ class DoctorDetail extends Component {
 
   componentDidMount() {
     this._makeGetRequestDocSpeciality();
+    console.log("IsSubmit :", this.props);
   }
 
   _makeGetRequestDocSpeciality = () => {
@@ -90,7 +91,7 @@ class DoctorDetail extends Component {
   };
 
   _handleOnChange = (field, value) => {
-    // console.log(field, value);
+    // debugger
     const { userData, isDirty } = this.state;
     if (!value && typeof value === "number") {
       userData[field] = "";
@@ -120,7 +121,7 @@ class DoctorDetail extends Component {
     e.preventDefault();
     let isDirty = {
       name: true,
-      speciality: true,
+      specialty: true,
       experience: true,
       consultFees: true,
       qualification: true,
@@ -143,8 +144,9 @@ class DoctorDetail extends Component {
           id: ramId(),
           ...userData,
         };
-        this.props.doctorDetail({data});
+        this.props.doctorDetail({ data });
         console.log("Final API call: ", userData);
+        // console.log("IsSubmit :",this.props.isSubmit)
       }
     });
   };
@@ -167,13 +169,13 @@ class DoctorDetail extends Component {
           }
           break;
         }
-        case "speciality": {
-          if (isDirty.speciality) {
-            if (!userData.speciality.trim().length) {
+        case "specialty": {
+          if (isDirty.specialty) {
+            if (!userData.specialty.trim().length) {
               errors[each] = "* Please select the above field";
             } else {
               delete errors[each];
-              isDirty.speciality = false;
+              isDirty.specialty = false;
             }
           }
           break;
@@ -219,7 +221,6 @@ class DoctorDetail extends Component {
         }
         case "practiceAt": {
           if (isDirty.practiceAt) {
-              debugger
             if (!userData.practiceAt.trim().length) {
               errors[each] = "* Please fill above field";
             } else {
@@ -342,10 +343,18 @@ class DoctorDetail extends Component {
 
   render() {
     const { userData, specialties, errors, languages } = this.state;
+    const specialtyOptions = specialties.map((s) => {
+      return (
+        <MenuItem key={s.id} value={s.name}>
+          {s.name}
+        </MenuItem>
+      );
+    });
+
     const langCheckbox = languages.map((lang) => {
       return (
-        <div  key={lang} className='form-check-inline'>
-          <label >
+        <div key={lang} className='form-check-inline'>
+          <label>
             <input
               type='checkbox'
               value={lang}
@@ -387,20 +396,24 @@ class DoctorDetail extends Component {
                 )}
               </div>
               <div className='form-group'>
-                <label htmlFor='Speciality'>Speciality</label>
-                <select
+                <label htmlFor='Specialty'>Specialty</label>
+                <Select
                   className='form-control'
                   id='specialtyInput'
                   name='specialty'
                   onChange={(e) =>
                     this._handleOnChange("specialty", e.target.value)
                   }>
-                  {specialties.map((e) => (
+                  <MenuItem value=''>
+                    <em>Select Specialty</em>
+                  </MenuItem>
+                  {/* {specialties.map((e) => (
                     <option key={e.id} value={e.name}>
                       {e.name}
                     </option>
-                  ))}
-                </select>
+                  ))} */}
+                  {specialtyOptions}
+                </Select>
                 {errors && (
                   <Fragment>
                     <small style={{ color: "red" }}>
@@ -690,17 +703,17 @@ class DoctorDetail extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {
-        doctorDetail: state
-    };
+  return {
+    doctorDetail: state,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    // console.log("DoctorDetil",this.props)
+  // console.log("DoctorDetil",this.props)
   return {
     doctorDetail: (doctorDetailData) =>
       dispatch(doctorDetail(doctorDetailData)),
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(DoctorDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(DoctorDetail);

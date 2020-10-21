@@ -3,13 +3,15 @@ import DoctorDetail from "./DoctorDetail";
 import DoctorTiming from "./DoctorTiming";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Tabs, TabList, TabPanel, Tab } from "react-tabs";
-import 'react-tabs/style/react-tabs.css';
-import "./AddDoctor.styles.css"
+import "react-tabs/style/react-tabs.css";
+import "./AddDoctor.styles.css";
 
 class AddDoctor extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isSubmit: false,
+    };
   }
   render() {
     return (
@@ -20,7 +22,7 @@ class AddDoctor extends Component {
               <Tabs>
                 <TabList>
                   <Tab>
-                    <Link to='/'>DoctorDetail</Link>
+                    <Link to='/step-1'>DoctorDetail</Link>
                   </Tab>
                   <Tab>
                     <Link to='/step-2'>DoctorTiming</Link>
@@ -28,9 +30,13 @@ class AddDoctor extends Component {
                 </TabList>
 
                 <TabPanel>
-                  <Route path='/' component={DoctorDetail} />
+                  <Route
+                    path='/'
+                    render={(props) => <DoctorDetail {...props} isAuthed={true} />}
+                  />
                 </TabPanel>
                 <TabPanel>
+                  {/* <Route path='/step-2' component={this.state.isSubmit ?{DoctorTiming}:null} /> */}
                   <Route path='/step-2' component={DoctorTiming} />
                 </TabPanel>
               </Tabs>

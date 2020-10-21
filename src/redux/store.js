@@ -1,6 +1,8 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware  } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import logger from "redux-logger";
+import hardSet from "redux-persist/es/stateReconciler/hardSet";
 
 import { addDoctorReducer } from './reducers';
 
@@ -11,13 +13,14 @@ const persistConfig = {
     key: 'root',
     storage,
     keyPrefix: '',
-    whitelist: ['addDoctor']
+    stateReconciler: hardSet
 };
 
 const pReducer = persistReducer(persistConfig, rootReducers)
 export const store = createStore(
     pReducer,
-    undefined
+    undefined,
+    applyMiddleware(logger)
 )
 
 export const persistor = persistStore(store)

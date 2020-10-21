@@ -141,7 +141,6 @@ class DoctorTiming extends Component {
           <Select
             labelId='demo-simple-select-helper-label'
             id='demo-simple-select-helper'
-            value={val.from}
             onChange={(e) =>
               this._handleOnChange(day, ind, {
                 from: parseInt(e.target.value) ? parseInt(e.target.value) : "",
@@ -153,7 +152,7 @@ class DoctorTiming extends Component {
             {fromTimeOpt}
           </Select>
         </FormControl>
-        <FormControl key={ind} className='' style={{ flex: "3", height: "38px" ,marginLeft:"20px" }}>
+        <FormControl key={ind+"1"} className='' style={{ flex: "3", height: "38px" ,marginLeft:"20px" }}>
           <Select
             labelId='demo-simple-select-helper-label'
             id='demo-simple-select-helper'
@@ -217,7 +216,7 @@ class DoctorTiming extends Component {
     };
     this.setState({ isDirty }, () => {
       let errors = this._validateForm();
-      console.log(errors);
+      // console.log(errors);
       if (!errors) {
         const { userData } = this.state;
         console.log("Make API call: ", userData);

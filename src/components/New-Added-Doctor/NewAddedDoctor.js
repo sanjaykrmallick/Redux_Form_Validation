@@ -26,7 +26,7 @@ const NewAddedDoctor = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {stateDate.DocList===null || stateDate.DocList===undefined ? <Fragment><h1>DATA NOT Available</h1></Fragment> : stateDate.DocList.map(doc =>
+                    {stateDate.doctorList===null || stateDate.doctorList===undefined ? <Fragment><h1>DATA NOT Available</h1></Fragment> : stateDate.doctorList.map(doc =>
                         <NewLists doctor={doc} key={doc.phone} />
                     ) }
                 </tbody>

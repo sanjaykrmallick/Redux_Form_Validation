@@ -19,7 +19,6 @@ export const addDoctorReducer = (state = initialState, action) => {
             state = {
                 ...state,
                 doctorDetail: {...action.payload.doctorDetail},
-                active_Tab: '2'
             }
             break;
         }
@@ -34,7 +33,6 @@ export const addDoctorReducer = (state = initialState, action) => {
                 ...state,
                 doctorDetail: {},
                 doctorList: [...state.doctorList, obj],
-                active_Tab: '1'
             }
             break;
         }
@@ -42,30 +40,7 @@ export const addDoctorReducer = (state = initialState, action) => {
             state = {
                 ...state,
                 doctorDetail: {},
-                active_Tab: '1'
             }
-            break;
-        }
-        case TOGGLE_TAB: {
-            if(action.payload.tabNum === '2') {
-                if(state.doctorDetail && Object.keys(state.doctorDetail).length) {
-                    state = {
-                        ...state,
-                        active_Tab: action.payload.tabNum
-                    }
-                } else {
-                    state = {
-                        ...state,
-                        active_Tab: '1'
-                    }
-                }
-            } else {
-                state = {
-                    ...state,
-                    active_Tab: '1'
-                }
-            }
-
             break;
         }
         default: {
